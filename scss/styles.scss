@@ -67,30 +67,100 @@ header {
 }
 
 // テロップ
-.scrolling-thumbnails {
-  overflow: hidden; // はみ出した部分を隠す
-  white-space: nowrap; // 横並びにする
-  box-sizing: border-box;
+.swiper-container {
+  height: 180px;
+  padding-bottom: 20px;
+  max-width: 100%;
+  overflow: hidden; // スクリーンからはみ出をないように設定
+  position: relative; // コンテナ内に要素を配置するためにrelativeを設定
 
-  .thumbnails-wrapper {
-    display: inline-flex; // 横並びにする
-    animation: scroll-thumbnails 20s linear infinite; // スクロールアニメーション
+  .swiper-wrapper {
+    display: flex;
+    max-width: 1000px;
+    gap: 10px; // スライド間のスペース
   }
 
-  img {
-    width: 250px; // サムネイルの幅を調整
-    height: auto; // 高さを自動調整
-    margin-right: 10px; // 画像間のスペース
-  }
-}
+  .swiper-slide {
+    flex: 0 0 auto; // 各スライドが自動幅で並ぶように設定
+    position: relative;
+    overflow: hidden; // 画像が枠からはみ出さないようにする
 
-// @keyframes アニメーション設定
-@keyframes scroll-thumbnails {
-  0% {
-    transform: translateX(0); // 初期位置
+    img {
+      max-height: 100%; // 画像の高さをコンテナの高さに合わせる
+      max-width: 100%; // 画像が親要素からはみ出さないように調整
+      object-fit: cover; // 画像を枠に収める
+      margin: 0; // 画像に余分なマージンがないように設定
+      cursor: pointer;
+      transition: transform 0.3s ease; // 画像の拡大をスムーズにする
+
+      &:hover {
+        filter: brightness(0.8) sepia(0.1) hue-rotate(0deg); // フィルター効果
+        transform: scale(1.1); // 画像を10%拡大
+      }
+    }
+    .slide-title {
+      position: absolute;
+      bottom: 20px; // タイトルを画像の下端に配置
+      left: 20px; // 左側に余白を設定
+      color: #fff; // タイトルの文字色を白に設定
+      font-size: 1.2em; // タイトルのフォントサイズ
+      font-weight: bold; // タイトルのフォントウェイト
+    }
   }
-  100% {
-    transform: translateX(-50%); // 50% 左に移動してループ
+
+  // // ナビゲーションボタンのスタイル
+  // .swiper-button-next,
+  // .swiper-button-prev {
+  //   position: absolute;
+  //   transform: translateY(-50%); // 垂直方向に中央揃え
+  //   width: 20px;
+  //   height: 20px;
+  //   // background-color: rgba(0, 0, 0, 0.5); // ボタンの背景色を設定
+  //   color: #fff;
+  //   border-radius: 50%; // 丸いボタンにする
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   cursor: pointer;
+  // }
+
+  // .swiper-button-next {
+  //   right: 10px; // 右端に配置
+  // }
+
+  // .swiper-button-prev {
+  //   left: 10px; // 左端に配置
+  // }
+
+  // ナビゲーションボタンを非表示にする
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: none;
+  }
+
+  // ドットのページネーションのスタイル
+  .swiper-pagination {
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%); // 水平方向に中央揃え
+    display: flex;
+    justify-content: center;
+    gap: 8px; // ドット間のスペースを設定
+
+    // ドットの基本スタイル
+    .swiper-pagination-bullet {
+      background-color: #bbb; // 通常のドットの色
+      width: 8px;
+      height: 8px;
+      border-radius: 50%; // 丸い形にする
+      opacity: 0.7; // 少し透過させる
+
+      &.swiper-pagination-bullet-active {
+        background-color: #333; // アクティブなドットの色
+        opacity: 1; // 不透明にする
+      }
+    }
   }
 }
 
@@ -98,12 +168,11 @@ header {
 .content {
   display: flex;
   gap: 30px;
-  margin-top: 20px;
+  margin-top: 50px;
   max-width: 1200px; // 最大幅を設定して中央揃え
   margin-left: auto; // 自動で中央揃え
   margin-right: auto; // 自動で中央揃え
 }
-
 .main-content {
   flex: 3;
 }
@@ -123,25 +192,44 @@ header {
     display: flex;
     align-items: center;
     background: #fff;
-    border-radius: 0;
+    overflow: hidden; // 画像やコンテンツがはみ出さないようにする
     padding: 0;
     cursor: pointer;
-    transition: filter 0.3s; // フィルターの遷移
+    transition: filter 0.3s ease; // 拡大とフィルターの遷移
 
     &:hover {
+      filter: brightness(1.1) sepia(0.1) hue-rotate(15deg); // フィルター効果
+
       .post-content h2,
       .post-content p {
         color: #666; // ホバー時に文字の色を変更
       }
-      filter: brightness(1.1) sepia(0.1) hue-rotate(15deg); // フィルター効果
     }
 
-    img {
-      max-width: 300px;
-      margin-right: 20px;
+    .post-img {
+      overflow: hidden; // 画像が枠からはみ出さないようにする
+      width: 300px; // 画像の幅を制限
+      height: 200px; // 画像の高さを制限
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.3s ease; // 画像の拡大をスムーズにする
+
+      img {
+        width: 100%; // 画像を親要素の幅に合わせる
+        height: 100%; // 画像を親要素の高さに合わせる
+        object-fit: cover; // 画像を枠内に収める
+        transition: transform 0.3s ease, filter 0.3s ease; // 拡大とフィルターの遷移
+
+        &:hover {
+          filter: brightness(1.1) sepia(0.1) hue-rotate(15deg); // フィルター効果
+          transform: scale(1.1); // 画像を10%拡大
+        }
+      }
     }
 
     .post-content {
+      padding: 20px; // テキストに余白を追加
       h2 {
         margin: 0 0 10px;
         font-size: 1.5em;
@@ -171,8 +259,8 @@ header {
 
   h2 {
     text-align: center;
-    font-size: 1.8em;
-    margin-bottom: 15px;
+    font-size: 1.1em;
+    margin-bottom: 20px;
     color: #222;
   }
 
@@ -182,18 +270,26 @@ header {
     align-items: center;
     margin-bottom: 15px;
     cursor: pointer;
-    transition: filter 0.3s; // フィルターの遷移
 
-    &:hover {
-      p a {
-        color: #666;
-      } // ホバー時に文字の色を変更
-      filter: brightness(1.1) sepia(0.1) hue-rotate(15deg); // フィルター効果
-    }
+    .popular-post-img {
+      overflow: hidden; // 画像が枠からはみ出さないようにする
+      width: 200px; // 画像の幅を制限
+      height: 130px; // 画像の高さを制限
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-    img {
-      max-width: 200px;
-      margin-right: 10px;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; // 画像を枠内に収めて拡大
+        transition: transform 0.3s ease, filter 0.3s ease; // 拡大とフィルターの遷移をスムーズにする
+
+        &:hover {
+          filter: brightness(1.1) sepia(0.1) hue-rotate(15deg); // フィルター効果
+          transform: scale(1.1); // 画像を10%拡大
+        }
+      }
     }
 
     p {
@@ -203,6 +299,12 @@ header {
         color: #444;
         text-decoration: none;
         transition: color 0.3s;
+      }
+    }
+
+    &:hover {
+      p a {
+        color: #666; // ホバー時に文字の色を変更
       }
     }
   }
@@ -220,5 +322,8 @@ footer {
 @media (max-width: 1000px) {
   .sidebar {
     display: none; // サイドバーを非表示にする
+  }
+  .swiper-container {
+    display: none;
   }
 }

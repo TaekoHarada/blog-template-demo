@@ -9,6 +9,11 @@
       href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
@@ -26,28 +31,54 @@
     <div class="title">ブログデモ</div>
 
     <!-- サムネイルのテロップ -->
-    <div class="scrolling-thumbnails">
-      <div class="thumbnails-wrapper">
-        <img src="images/food_01.png" alt="Thumbnail 1" />
-        <img src="images/food_02.png" alt="Thumbnail 2" />
-        <img src="images/food_03.png" alt="Thumbnail 3" />
-        <img src="images/food_04.png" alt="Thumbnail 4" />
-        <img src="images/food_05.png" alt="Thumbnail 5" />
-        <img src="images/food_06.png" alt="Thumbnail 6" />
-        <img src="images/food_07.png" alt="Thumbnail 6" />
-        <img src="images/food_08.png" alt="Thumbnail 6" />
-        <img src="images/food_09.png" alt="Thumbnail 6" />
-        <!-- 画像を繰り返すことで途切れないようにする -->
-        <img src="images/food_01.png" alt="Thumbnail 1" />
-        <img src="images/food_02.png" alt="Thumbnail 2" />
-        <img src="images/food_03.png" alt="Thumbnail 3" />
-        <img src="images/food_04.png" alt="Thumbnail 4" />
-        <img src="images/food_05.png" alt="Thumbnail 5" />
-        <img src="images/food_06.png" alt="Thumbnail 6" />
-        <img src="images/food_07.png" alt="Thumbnail 6" />
-        <img src="images/food_08.png" alt="Thumbnail 6" />
-        <img src="images/food_09.png" alt="Thumbnail 6" />
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="images/food_01.png" alt="Thumbnail 1" />
+          <div class="slide-title">ブログタイトル 1</div>
+        </div>
+        <div class="swiper-slide">
+          <img src="images/food_02.png" alt="Thumbnail 2" />
+          <div class="slide-title">ブログタイトル 2</div>
+        </div>
+        <div class="swiper-slide">
+          <img src="images/food_03.png" alt="Thumbnail 3" />
+          <div class="slide-title">ブログタイトル 3</div>
+        </div>
+        <div class="swiper-slide">
+          <img src="images/food_04.png" alt="Thumbnail 3" />
+          <div class="slide-title">ブログタイトル 4</div>
+        </div>
+        <div class="swiper-slide">
+          <img src="images/food_05.png" alt="Thumbnail 3" />
+          <div class="slide-title">ブログタイトル 5</div>
+        </div>
+        <div class="swiper-slide">
+          <img src="images/food_06.png" alt="Thumbnail 3" />
+          <div class="slide-title">ブログタイトル 6</div>
+        </div>
+        <div class="swiper-slide">
+          <img src="images/food_07.png" alt="Thumbnail 3" />
+          <div class="slide-title">ブログタイトル 7</div>
+        </div>
+        <div class="swiper-slide">
+          <img src="images/food_08.png" alt="Thumbnail 3" />
+          <div class="slide-title">ブログタイトル 8</div>
+        </div>
+        <div class="swiper-slide">
+          <img src="images/food_09.png" alt="Thumbnail 3" />
+          <div class="slide-title">ブログタイトル 9</div>
+        </div>
+        <div class="swiper-slide">
+          <img src="images/food_10.png" alt="Thumbnail 3" />
+          <div class="slide-title">ブログタイトル 10</div>
+        </div>
       </div>
+      <!-- ナビゲーションボタン -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <!-- ドットのページネーション -->
+      <div class="swiper-pagination"></div>
     </div>
 
     <main class="content">
@@ -55,19 +86,27 @@
         <section class="posts">
           <a href="post.html" class="post-link">
             <article class="post">
-              <img src="images/food_03.png" alt="Sample Post" />
+              <div class="post-img">
+                <img src="images/food_03.png" alt="Sample Post" />
+              </div>
               <div class="post-content">
-                <h2>Sample Post Title</h2>
-                <p>Short description of the first post...</p>
+                <h2>ブログタイトル　サンプル１</h2>
+                <p>
+                  ここにブログの記事が入ります、サンプル、サンプル、サンプル
+                  サンプル...
+                </p>
               </div>
             </article>
           </a>
+
           <a href="post.html" class="post-link">
             <article class="post">
-              <img src="images/food_04.png" alt="Sample Post" />
+              <div class="post-img">
+                <img src="images/food_04.png" alt="Sample Post" />
+              </div>
               <div class="post-content">
-                <h2>Sample Post Title 2</h2>
-                <p>Short description of the second post...</p>
+                <h2>ブログタイトル　サンプル２</h2>
+                <p>ここにブログの記事が入ります、それから...</p>
               </div>
             </article>
           </a>
@@ -75,13 +114,17 @@
       </section>
 
       <aside class="sidebar">
-        <h2>Popular Posts</h2>
+        <h2>人気記事</h2>
         <div class="popular-post">
-          <img src="images/food_01.png" alt="Popular Post" />
+          <div class="popular-post-img">
+            <img src="images/food_01.png" alt="Popular Post" />
+          </div>
           <p><a href="post.html">Popular Post Title 1</a></p>
         </div>
         <div class="popular-post">
-          <img src="images/food_02.png" alt="Popular Post" />
+          <div class="popular-post-img">
+            <img src="images/food_02.png" alt="Popular Post" />
+          </div>
           <p><a href="post.html">Popular Post Title 2</a></p>
         </div>
       </aside>
