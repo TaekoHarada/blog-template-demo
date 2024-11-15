@@ -1,0 +1,224 @@
+// リセットスタイル
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Zen Kaku Gothic New", sans-serif; // フォント
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  color: #333;
+  margin: 0 40px; // 左右の余白を40pxに設定
+}
+
+// ヘッダー
+header {
+  padding: 15px 0;
+  text-align: center;
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+
+    li a {
+      color: #444;
+      text-decoration: none;
+      position: relative; // 擬似要素の位置を調整するために追加
+      transition: color 0.3s;
+
+      &:hover {
+        color: #888;
+      }
+
+      // アンダーラインのスタイルを作成
+      &::after {
+        content: "";
+        position: absolute;
+        left: 50%; // 左端を中央に設定
+        bottom: -3px; // アンダーラインの位置を調整
+        width: 0; // 初期状態の幅を0に設定
+        height: 2px;
+        background-color: #888;
+        transition: width 0.3s, left 0.3s; // leftのトランジションも追加
+        transform: translateX(-50%); // 中央揃え
+      }
+
+      // ホバー時にアンダーラインが左から右に広がる
+      &:hover::after {
+        left: 50%; // 中央を維持
+        width: calc(100% + 20px); // アンダーラインを左右に長くする
+        transform: translateX(-50%); // 中央揃え
+      }
+    }
+  }
+}
+
+// タイトル
+.title {
+  text-align: center;
+  font-size: 2em;
+  margin: 20px 0;
+  color: #444;
+  padding-bottom: 10px;
+}
+
+// テロップ
+.scrolling-thumbnails {
+  overflow: hidden; // はみ出した部分を隠す
+  white-space: nowrap; // 横並びにする
+  box-sizing: border-box;
+
+  .thumbnails-wrapper {
+    display: inline-flex; // 横並びにする
+    animation: scroll-thumbnails 20s linear infinite; // スクロールアニメーション
+  }
+
+  img {
+    width: 250px; // サムネイルの幅を調整
+    height: auto; // 高さを自動調整
+    margin-right: 10px; // 画像間のスペース
+  }
+}
+
+// @keyframes アニメーション設定
+@keyframes scroll-thumbnails {
+  0% {
+    transform: translateX(0); // 初期位置
+  }
+  100% {
+    transform: translateX(-50%); // 50% 左に移動してループ
+  }
+}
+
+// メインコンテンツとサイドバー
+.content {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+  max-width: 1200px; // 最大幅を設定して中央揃え
+  margin-left: auto; // 自動で中央揃え
+  margin-right: auto; // 自動で中央揃え
+}
+
+.main-content {
+  flex: 3;
+}
+
+.posts {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  .post-link {
+    text-decoration: none; // リンクの下線を削除
+    color: inherit; // リンク内のテキストの色を継承
+    display: block; // ブロック要素としてリンクを表示
+  }
+
+  .post {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 0;
+    padding: 0;
+    cursor: pointer;
+    transition: filter 0.3s; // フィルターの遷移
+
+    &:hover {
+      .post-content h2,
+      .post-content p {
+        color: #666; // ホバー時に文字の色を変更
+      }
+      filter: brightness(1.1) sepia(0.1) hue-rotate(15deg); // フィルター効果
+    }
+
+    img {
+      max-width: 300px;
+      margin-right: 20px;
+    }
+
+    .post-content {
+      h2 {
+        margin: 0 0 10px;
+        font-size: 1.5em;
+        color: #222;
+        transition: color 0.3s; // 文字のカラーに遷移効果を追加
+      }
+
+      p {
+        color: #555;
+        font-size: 0.95em;
+        transition: color 0.3s; // 文字のカラーに遷移効果を追加
+      }
+
+      a {
+        color: #666;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+// サイドバー
+.sidebar {
+  flex: 1;
+  background: #fff;
+  padding: 20px;
+
+  h2 {
+    text-align: center;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    color: #222;
+  }
+
+  .popular-post {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: filter 0.3s; // フィルターの遷移
+
+    &:hover {
+      p a {
+        color: #666;
+      } // ホバー時に文字の色を変更
+      filter: brightness(1.1) sepia(0.1) hue-rotate(15deg); // フィルター効果
+    }
+
+    img {
+      max-width: 200px;
+      margin-right: 10px;
+    }
+
+    p {
+      margin: 0;
+      font-size: 0.95em;
+      a {
+        color: #444;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+    }
+  }
+}
+
+// フッター
+footer {
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 30px;
+  border-top: 1px solid #888;
+}
+
+// スクリーンサイズがmiddleより小さい場合のスタイル
+@media (max-width: 1000px) {
+  .sidebar {
+    display: none; // サイドバーを非表示にする
+  }
+}
